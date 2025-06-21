@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛳️ Fileship
+Fileship is a production-grade, full-stack file sharing platform — inspired by Dropbox, designed to teach real-world backend engineering. Built with cutting-edge technologies like **Next.js**, **TypeScript**, and **Docker**, Fileship is cloud-ready and developer-first.
 
-## Getting Started
+# ⚙️ Tech Stack
+* **Frontend**: Next.js (TypeScript)
+* **Backend**: Next.js API Routes (Serverless)
+* **Containerization**: Docker, Docker Compose
 
-First, run the development server:
+# 🛠️ Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+⚠️ **NOTE for First-Time Users** Before proceeding, please ensure you:
+* Have **Docker** and **Docker Desktop** installed and set up
+* Keep **Docker Desktop running at all times** while using the project
+
+# 🧾 Getting Started
+## 🌀 Step 1: Clone the Repository
+
+```
+git clone https://github.com/YadavPrasad/fileship.git
+cd fileship
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧱 Step 2: Build and Run the Full Stack Application
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This will build everything and spin up all services:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+docker compose up --build
+```
 
-## Learn More
+🔁 This will:
+* Build the frontend and backend services
+* Spin up all containers
+* Make the application available at `http://localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+🚫 Note: The **frontend will NOT hot-reload** inside Docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧪 Optional: Development Mode
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If you want faster development with hot-reload:
 
-## Deploy on Vercel
+```
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This runs the application locally outside Docker for quicker iteration.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧹 To Stop and Clean Up
+
+When you're done, gracefully shut everything down:
+
+```
+docker compose down
+```
+
+# 💡 Tips
+
+* Ensure Docker Desktop is running before executing any `docker compose` commands
+* For live frontend development, consider running the application locally outside Docker
+* Use `docker compose logs` to view container logs for debugging
+
+# 🧑‍💻 Author
+
+**Yadav Prasad**
+* GitHub: [@YadavPrasad](https://github.com/YadavPrasad)
