@@ -54,12 +54,6 @@ When you're done, gracefully shut everything down:
 docker compose down
 ```
 
-# 💡 Tips
-
-* Ensure Docker Desktop is running before executing any `docker compose` commands
-* For live frontend development, consider running the application locally outside Docker
-* Use `docker compose logs` to view container logs for debugging
-
 # 🧑‍💻 Author
 
 **Yadav Prasad**
