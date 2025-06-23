@@ -1,19 +1,26 @@
-# Base image
-FROM node:20-alpine
+# Stage 1: Build the React app
+FROM node:20-alpine as builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy files and install deps
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy rest of the app
 COPY . .
-
-# Build the Next.js app
 RUN npm run build
 
-# Expose port and run Next.js
-EXPOSE 3000
-CMD ["npm", "start"]
+# Stage 2: Serve using Nginx
+FROM nginx:stable-alpine
+
+# Remove default Nginx static assets
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy built React files to Nginx public folder
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Copy custom Nginx config (optional)
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
