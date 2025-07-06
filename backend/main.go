@@ -1,27 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/YadavPrasad/fileship/go-backend/models"
-	"github.com/YadavPrasad/fileship/go-backend/utils"
+    "github.com/gin-gonic/gin"
+    "github.com/YadavPrasad/FileShip/backend/handlers"
+    "github.com/YadavPrasad/FileShip/backend/middleware"
 )
 
 func main() {
-	utils.InitDB()
+    r := gin.Default()
 
-	// Run auto migration
-	err := utils.DB.AutoMigrate(&models.User{})
-	if err != nil {
-		log.Fatal("❌ Failed to migrate DB:", err)
-	}
+    publicRoutes := r.Group("/public")
+    {
+        publicRoutes.POST("/login", handlers.Login)
+        publicRoutes.POST("/register", handlers.Register)
+    }
 
-	http.HandleFunc("/api/ping", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "pong from Go + NeonDB + GORM 🚀")
-	})
+    protectedRoutes := r.Group("/protected")
+    protectedRoutes.Use(middleware.AuthenticationMiddleware())
+    {
 
-	fmt.Println("🚀 Server running on http://localhost:8000")
-	log.Fatal(http.ListenAndServe(":8000", nil))
+    }
+
+    r.Run(":8080")
 }
